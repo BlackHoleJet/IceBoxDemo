@@ -19,21 +19,24 @@
 
 
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/bt_bt1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/button" />
 
                 <ImageView
                     android:id="@+id/img_origin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="btorigin"
                     android:src="@mipmap/origin"
                     android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/bt_bt1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="bt1"
+                    android:src="@mipmap/button" />
 
             </FrameLayout>
 
@@ -49,40 +52,60 @@
 
 
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/bt_bt2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+                    android:onClick="bt2"
                     android:src="@mipmap/button" />
 
                 <ImageView
                     android:id="@+id/img_apple"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="btapple"
                     android:src="@mipmap/apple"
+
                     android:visibility="gone" />
 
             </FrameLayout>
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="50dp"
+            android:background="#7fa87f"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+
             <FrameLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp">
 
                 <ImageView
                     android:id="@+id/bt_bt3"
                     android:layout_width="wrap_content"
+
                     android:layout_height="wrap_content"
+                    android:onClick="bt3"
                     android:src="@mipmap/button" />
 
                 <ImageView
                     android:id="@+id/img_lizhi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="btlizhi"
                     android:src="@mipmap/lizhi"
+
                     android:visibility="gone" />
 
             </FrameLayout>
