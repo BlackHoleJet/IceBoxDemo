@@ -58,9 +58,40 @@ public class FoodFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_food, container, false);
-        HorizontalGridView mGvFood = (HorizontalGridView) view.findViewById(R.id.gv_food);
-        mGvFood.setAdapter(new FoodAdapter(this.getActivity()));
+//        HorizontalGridView mGvFood = (HorizontalGridView) view.findViewById(R.id.gv_food);
+//        mGvFood.setAdapter(new FoodAdapter(this.getActivity()));
+        GridView mGvFood = (GridView) view.findViewById(R.id.gv_food);
+        mGvFood.setAdapter(new FoodGvAdapter());
         return view;
+    }
+
+    class FoodGvAdapter extends BaseAdapter {
+
+
+        @Override
+        public int getCount() {
+            return imagIds.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = View.inflate(FoodFragment.this.getActivity(), R.layout.gridview_food, null);
+
+            }
+
+            return convertView;
+        }
     }
 
 
