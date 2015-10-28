@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.smart_haier.pengliang.demo"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -34,4 +34,5 @@ dependencies {
     compile 'com.daimajia.easing:library:1.0.1@aar'
     compile 'com.daimajia.androidanimations:library:1.1.3@aar'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.5'
+    compile 'com.android.support:leanback-v17:22.1.0'
 }
