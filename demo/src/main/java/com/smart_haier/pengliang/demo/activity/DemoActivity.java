@@ -1,27 +1,36 @@
-package com.smart_haier.pengliang.demo;
+package com.smart_haier.pengliang.demo.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
-import com.nineoldandroids.animation.Animator;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.smart_haier.pengliang.demo.R;
+
+import java.util.ArrayList;
 
 
 public class DemoActivity extends AppCompatActivity {
     private ImageView bt1, bt2, bt3, img_origin, img_lizhi, img_apple;
     private YoYo.YoYoString rope;
     private static final String TAG = DemoActivity.class.getSimpleName();
+    private BarChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_demo);
         init();
 
@@ -34,7 +43,26 @@ public class DemoActivity extends AppCompatActivity {
         img_apple = (ImageView) findViewById(R.id.img_apple);
         img_origin = (ImageView) findViewById(R.id.img_origin);
         img_lizhi = (ImageView) findViewById(R.id.img_lizhi);
+        mChart = (BarChart) findViewById(R.id.chart1);
 
+        mChart.setDescription("近日食物消耗：");
+
+        // scaling can now only be done on x- and y-axis separately
+        mChart.setPinchZoom(false);
+
+        mChart.setDrawBarShadow(false);
+        mChart.setDrawGridBackground(false);
+        mChart.setTouchEnabled(false);
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelsToSkip(0);
+        xAxis.setDrawGridLines(false);
+
+        mChart.getAxisLeft().setDrawGridLines(false);
+
+        mChart.getLegend().setEnabled(false);
+
+        setData(10);
 
     }
 
@@ -106,5 +134,27 @@ public class DemoActivity extends AppCompatActivity {
         showAndHide(img_origin, bt1);
     }
 
+
+    private void setData(int count) {
+
+        ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
+        ArrayList<String> xVals = new ArrayList<String>();
+
+        for (int i = 0; i < count; i++) {
+            float val = (float) (Math.random() * count) + 15;
+            yVals.add(new BarEntry((int) val, i));
+            xVals.add((int) val + "");
+        }
+
+        BarDataSet set = new BarDataSet(yVals, "食物：");
+        set.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        set.setDrawValues(false);
+
+        BarData data = new BarData(xVals, set);
+
+        mChart.setData(data);
+        mChart.invalidate();
+        mChart.animateY(800);
+    }
 
 }

@@ -3,4 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_demo">DemoActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_food">食材管理</string>
+    <string name="title_shopping">购物</string>
+    <string name="title_system">系统</string>
+    <string name="title_person">个人信息</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
