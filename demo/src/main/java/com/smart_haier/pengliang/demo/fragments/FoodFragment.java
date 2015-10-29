@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v17.leanback.widget.HorizontalGridView;
+import android.support.v17.leanback.widget.OnChildSelectedListener;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +17,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.smart_haier.pengliang.demo.R;
 import com.smart_haier.pengliang.demo.activity.OnChangeButtonListener;
 
+import java.util.ArrayList;
 import java.util.zip.Inflater;
 
 
@@ -25,6 +34,7 @@ public class FoodFragment extends Fragment {
     private int[] imagIds = {R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple};
+    private BarChart mChart;
 
 
     private OnChangeButtonListener mListener;
@@ -56,14 +66,32 @@ public class FoodFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_food, container, false);
-//        HorizontalGridView mGvFood = (HorizontalGridView) view.findViewById(R.id.gv_food);
-//        mGvFood.setAdapter(new FoodAdapter(this.getActivity()));
+
         GridView mGvFood = (GridView) view.findViewById(R.id.gv_food);
         mGvFood.setAdapter(new FoodGvAdapter());
+
+
+
+        mChart = (BarChart) view.findViewById(R.id.chart1);
+        mChart.setDescription("近日食物消耗：");
+        // scaling can now only be done on x- and y-axis separately
+        mChart.setPinchZoom(false);
+        mChart.setDrawBarShadow(false);
+        mChart.setDrawGridBackground(false);
+        mChart.setTouchEnabled(false);
+        XAxis xAxis = mChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setLabelsToSkip(0);
+        xAxis.setDrawGridLines(false);
+        mChart.getAxisLeft().setDrawGridLines(false);
+        mChart.getLegend().setEnabled(false);
+        setData(10);
+
+
         return view;
     }
+
 
     class FoodGvAdapter extends BaseAdapter {
 
@@ -95,49 +123,6 @@ public class FoodFragment extends Fragment {
     }
 
 
-    class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
-        private Context mContext;
-
-        public FoodAdapter(Context context) {
-            this.mContext = context;
-        }
-
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = View.inflate(mContext, R.layout.gridview_food, null);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            holder.imageView.setImageResource(imagIds[position]);
-            holder.imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(FoodFragment.this.getActivity(), "ok", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return imagIds.length;
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            private ImageView imageView;
-
-            public ViewHolder(View itemView) {
-                super(itemView);
-                imageView = (ImageView) itemView.findViewById(R.id.img_food);
-            }
-        }
-
-
-    }
-
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -153,6 +138,29 @@ public class FoodFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+
+    private void setData(int count) {
+
+        ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
+        ArrayList<String> xVals = new ArrayList<String>();
+
+        for (int i = 0; i < count; i++) {
+            float val = (float) (Math.random() * count) + 15;
+            yVals.add(new BarEntry((int) val, i));
+            xVals.add((int) val + "");
+        }
+
+        BarDataSet set = new BarDataSet(yVals, "食物：");
+        set.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        set.setDrawValues(false);
+
+        BarData data = new BarData(xVals, set);
+
+        mChart.setData(data);
+        mChart.invalidate();
+        mChart.animateY(800);
     }
 
 

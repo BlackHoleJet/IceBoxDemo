@@ -1,17 +1,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:gridview="http://schemas.android.com/apk/com.opensource.widget"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+
     tools:context="com.smart_haier.pengliang.demo.fragments.HomeFragment">
 
     <GridView
         android:id="@+id/gv_food"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:numColumns="4"/>
+        android:layout_weight="2"
+        android:numColumns="4" />
+
+
+    <!--<android.support.v17.leanback.widget.HorizontalGridView-->
+        <!--android:id="@+id/gv_food"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="top"-->
+        <!--gridview:horizontalMargin="2dip"-->
+        <!--gridview:numberOfRows="1"-->
+        <!--gridview:rowHeight="80dip"-->
+        <!--gridview:verticalMargin="1dip" />-->
 
 
 
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="温馨提示：" />
+
+
+    </LinearLayout>
 
 
 </LinearLayout>
