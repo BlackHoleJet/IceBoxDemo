@@ -1,29 +1,32 @@
 package com.smart_haier.pengliang.demo.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v17.leanback.widget.HorizontalGridView;
-import android.support.v17.leanback.widget.OnChildSelectedListener;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.jess.ui.TwoWayGridView;
 import com.smart_haier.pengliang.demo.R;
+import com.smart_haier.pengliang.demo.activity.MainActivity;
 import com.smart_haier.pengliang.demo.activity.OnChangeButtonListener;
 
 import java.util.ArrayList;
@@ -35,7 +38,8 @@ public class FoodFragment extends Fragment {
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple};
     private BarChart mChart;
-
+    private RequestQueue mRequestQueue;
+    private String ImageUrl = "http://www.51qe.cn/zhongyao/UploadFiles_5272/201210/2012101109342023.jpg";
 
     private OnChangeButtonListener mListener;
     private static FoodFragment instance = null;
@@ -67,10 +71,9 @@ public class FoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_food, container, false);
-
-        GridView mGvFood = (GridView) view.findViewById(R.id.gv_food);
+        mRequestQueue= mRequestQueue = Volley.newRequestQueue(FoodFragment.this.getActivity());
+        TwoWayGridView mGvFood = (TwoWayGridView) view.findViewById(R.id.gv_food);
         mGvFood.setAdapter(new FoodGvAdapter());
-
 
 
         mChart = (BarChart) view.findViewById(R.id.chart1);
@@ -95,10 +98,9 @@ public class FoodFragment extends Fragment {
 
     class FoodGvAdapter extends BaseAdapter {
 
-
         @Override
         public int getCount() {
-            return imagIds.length;
+            return 1000;
         }
 
         @Override
@@ -113,13 +115,40 @@ public class FoodFragment extends Fragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            final ViewHolder vh;
             if (convertView == null) {
-                convertView = View.inflate(FoodFragment.this.getActivity(), R.layout.gridview_food, null);
-
+                vh = new ViewHolder();
+                convertView = View.inflate(FoodFragment.this.getActivity(), R.layout.gridview_item, null);
+                vh.imageView = (ImageView) convertView.findViewById(R.id.img_food);
+                convertView.setTag(vh);
+            } else {
+                vh = (ViewHolder) convertView.getTag();
             }
+            ImageRequest irequest = new ImageRequest(
+                    ImageUrl,
+                    new Response.Listener<Bitmap>() {
+                        @SuppressLint("NewApi")
+                        @SuppressWarnings("deprecation")
+                        @Override
+                        public void onResponse(Bitmap bitmap) {
+//                            img.setBackgroundDrawable(new BitmapDrawable(
+//                                    MainActivity.this.getResources(), bitmap));
+                            vh.imageView.setImageBitmap(bitmap);
+                        }
+                    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError arg0) {
+                    Toast.makeText(FoodFragment.this.getActivity(), "load img err", Toast.LENGTH_SHORT).show();
 
+                }
+            });
+            mRequestQueue.add(irequest);
             return convertView;
         }
+    }
+
+    class ViewHolder {
+        ImageView imageView;
     }
 
 

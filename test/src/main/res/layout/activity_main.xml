@@ -3,7 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.smart_haier.pengliang.test.MainActivity">
 
+    <com.jess.ui.TwoWayGridView
+        android:id="@+id/gv_test"
+        app:cacheColorHint="#E8E8E8"
+        app:columnWidth="80dp"
+        app:rowHeight="80dp"
+        app:numColumns="auto_fit"
+        app:numRows="auto_fit"
+        app:verticalSpacing="16dp"
+        app:horizontalSpacing="16dp"
+        app:stretchMode="spacingWidthUniform"
+        app:scrollDirectionPortrait="vertical"
+        app:scrollDirectionLandscape="horizontal"
+        app:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+    </com.jess.ui.TwoWayGridView>
 </LinearLayout>

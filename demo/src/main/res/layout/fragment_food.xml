@@ -1,5 +1,5 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:gridview="http://schemas.android.com/apk/com.opensource.widget"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,23 +7,31 @@
 
     tools:context="com.smart_haier.pengliang.demo.fragments.HomeFragment">
 
-    <GridView
-        android:id="@+id/gv_food"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:numColumns="4" />
-
-
-    <!--<android.support.v17.leanback.widget.HorizontalGridView-->
+    <!--<GridView-->
         <!--android:id="@+id/gv_food"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:gravity="top"-->
-        <!--gridview:horizontalMargin="2dip"-->
-        <!--gridview:numberOfRows="1"-->
-        <!--gridview:rowHeight="80dip"-->
-        <!--gridview:verticalMargin="1dip" />-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="2"-->
+        <!--android:numColumns="4" />-->
+
+    <com.jess.ui.TwoWayGridView
+        android:id="@+id/gv_food"
+        app:cacheColorHint="#E8E8E8"
+        app:columnWidth="80dp"
+        app:rowHeight="80dp"
+        app:numColumns="auto_fit"
+        app:numRows="auto_fit"
+        app:verticalSpacing="16dp"
+        app:horizontalSpacing="16dp"
+        app:stretchMode="spacingWidthUniform"
+        app:scrollDirectionPortrait="vertical"
+        app:scrollDirectionLandscape="horizontal"
+        app:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.jess.ui.TwoWayGridView>
+
 
 
 
