@@ -30,6 +30,7 @@ public class MainActivity extends FragmentActivity implements OnChangeButtonList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
         if (savedInstanceState == null) {

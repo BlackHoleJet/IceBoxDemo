@@ -2,13 +2,16 @@ package com.smart_haier.pengliang.demo.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -25,6 +28,7 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.jess.ui.TwoWayAdapterView;
 import com.jess.ui.TwoWayGridView;
 import com.smart_haier.pengliang.demo.R;
 import com.smart_haier.pengliang.demo.activity.MainActivity;
@@ -36,6 +40,7 @@ import java.util.zip.Inflater;
 
 public class FoodFragment extends Fragment {
     private static final String TAG = FoodFragment.class.getSimpleName();
+    AlertDialog dialog = null;
 
     private int[] imagIds = {R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
@@ -78,9 +83,22 @@ public class FoodFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_food, container, false);
         mRequestQueue = Volley.newRequestQueue(FoodFragment.this.getActivity());
-        TwoWayGridView mGvFood = (TwoWayGridView) view.findViewById(R.id.gv_food);
+        final TwoWayGridView mGvFood = (TwoWayGridView) view.findViewById(R.id.gv_food);
         mGvFood.setAdapter(new FoodGvAdapter());
+        final View v = View.inflate(FoodFragment.this.getActivity(), R.layout.gridview_item, null);
 
+        dialog = new AlertDialog.Builder(FoodFragment.this.getActivity())
+                .setTitle("实物详情")
+                .setPositiveButton("确定", null)
+                .create();
+
+        mGvFood.setOnItemClickListener(new TwoWayAdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(TwoWayAdapterView<?> parent, View view, int position, long id) {
+                dialogShow(dialog, v);
+
+            }
+        });
 
         mChart = (BarChart) view.findViewById(R.id.chart1);
         mChart.setDescription("近日食物消耗：");
@@ -100,6 +118,17 @@ public class FoodFragment extends Fragment {
 
         return view;
     }
+
+
+    public void dialogShow(AlertDialog dialog, View view) {
+        dialog.setView(view);
+        Window window = dialog.getWindow();
+        window.setGravity(Gravity.CENTER);  //此处可以设置dialog显示的位置
+        window.setWindowAnimations(R.style.mystyle);  //添加动画
+        dialog.show();
+    }
+
+    ;
 
 
     class FoodGvAdapter extends BaseAdapter {
