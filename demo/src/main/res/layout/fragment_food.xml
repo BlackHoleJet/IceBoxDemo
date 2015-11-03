@@ -8,46 +8,48 @@
     tools:context="com.smart_haier.pengliang.demo.fragments.HomeFragment">
 
     <!--<GridView-->
-        <!--android:id="@+id/gv_food"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_weight="2"-->
-        <!--android:numColumns="4" />-->
+    <!--android:id="@+id/gv_food"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_weight="2"-->
+    <!--android:numColumns="4" />-->
 
     <com.jess.ui.TwoWayGridView
         android:id="@+id/gv_food"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
         app:cacheColorHint="#E8E8E8"
-        app:columnWidth="80dp"
-        app:rowHeight="80dp"
-        app:numColumns="auto_fit"
-        app:numRows="auto_fit"
-        app:verticalSpacing="16dp"
-        app:horizontalSpacing="16dp"
-        app:stretchMode="spacingWidthUniform"
-        app:scrollDirectionPortrait="vertical"
-        app:scrollDirectionLandscape="horizontal"
+        app:columnWidth="300dp"
         app:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:horizontalSpacing="16dp"
+        app:numColumns="2"
+        app:numRows="auto_fit"
+        app:rowHeight="300dp"
+        app:scrollDirectionLandscape="horizontal"
+        app:scrollDirectionPortrait="vertical"
+        app:stretchMode="spacingWidthUniform"
+        app:verticalSpacing="16dp">
 
     </com.jess.ui.TwoWayGridView>
 
 
-
-
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart1"
             android:layout_width="match_parent"
-            android:layout_height="150dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="温馨提示：" />
 
 

@@ -1,1 +1,3 @@
 include ':demo', ':test',':TwoWayGridViewGradle'
+
+include ':aMapLocationDemo'

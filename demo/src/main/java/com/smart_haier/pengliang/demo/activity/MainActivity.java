@@ -7,6 +7,7 @@ import com.smart_haier.pengliang.demo.fragments.HomeFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.smart_haier.pengliang.demo.R;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity implements OnChangeButtonListener, View.OnClickListener {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private Fragment mHomeFragment, mFoodFragment;
     private TextView mTitle;
     private Button mBtHome, mBtFood;
@@ -29,11 +31,11 @@ public class MainActivity extends FragmentActivity implements OnChangeButtonList
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate()");
         if (savedInstanceState == null) {
             initFragments();
         }
         initView();
-
     }
 
     private void initView() {
@@ -63,6 +65,7 @@ public class MainActivity extends FragmentActivity implements OnChangeButtonList
 
     public void changeFragment(Fragment show, int titleId) {
 
+        Toast.makeText(MainActivity.this, "show:" + getShowFragment().getClass().getSimpleName(), Toast.LENGTH_SHORT).show();
         if (getShowFragment() != show) {
             mTitle.setText(titleId);
             getSupportFragmentManager().beginTransaction().hide(getShowFragment()).show(show).commit();
@@ -74,10 +77,10 @@ public class MainActivity extends FragmentActivity implements OnChangeButtonList
 
     public Fragment getShowFragment() {
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        Log.d(TAG, "fragments:" + fragments.toString());
         for (Fragment f : fragments) {
-            if (f.isVisible()) {
+            if (f != null && f.isVisible())
                 return f;
-            }
         }
         return null;
     }
@@ -95,6 +98,28 @@ public class MainActivity extends FragmentActivity implements OnChangeButtonList
                 changeFragment(mFoodFragment, R.string.title_food);
                 break;
         }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause()");
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart()");
+
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume()");
 
     }
 }

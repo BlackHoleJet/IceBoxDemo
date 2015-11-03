@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,8 @@ import java.util.zip.Inflater;
 
 
 public class FoodFragment extends Fragment {
+    private static final String TAG = FoodFragment.class.getSimpleName();
+
     private int[] imagIds = {R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple};
@@ -64,14 +67,17 @@ public class FoodFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView()");
+
         View view = inflater.inflate(R.layout.fragment_food, container, false);
-        mRequestQueue= mRequestQueue = Volley.newRequestQueue(FoodFragment.this.getActivity());
+        mRequestQueue = Volley.newRequestQueue(FoodFragment.this.getActivity());
         TwoWayGridView mGvFood = (TwoWayGridView) view.findViewById(R.id.gv_food);
         mGvFood.setAdapter(new FoodGvAdapter());
 
@@ -144,6 +150,7 @@ public class FoodFragment extends Fragment {
             });
             mRequestQueue.add(irequest);
             return convertView;
+
         }
     }
 
@@ -155,6 +162,8 @@ public class FoodFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d(TAG, "onAttach()");
+
         try {
             mListener = (OnChangeButtonListener) activity;
         } catch (ClassCastException e) {
@@ -166,6 +175,8 @@ public class FoodFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.d(TAG, "onDetach()");
+
         mListener = null;
     }
 

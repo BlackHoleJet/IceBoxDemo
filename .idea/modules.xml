@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IceBox.iml" filepath="$PROJECT_DIR$/IceBox.iml" />
       <module fileurl="file://$PROJECT_DIR$/TwoWayGridViewGradle/TwoWayGridViewGradle.iml" filepath="$PROJECT_DIR$/TwoWayGridViewGradle/TwoWayGridViewGradle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/aMapLocationDemo/aMapLocationDemo.iml" filepath="$PROJECT_DIR$/aMapLocationDemo/aMapLocationDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
     </modules>

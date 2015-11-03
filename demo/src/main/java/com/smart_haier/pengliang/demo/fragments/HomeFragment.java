@@ -3,6 +3,7 @@ package com.smart_haier.pengliang.demo.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.smart_haier.pengliang.demo.activity.OnChangeButtonListener;
 
 
 public class HomeFragment extends Fragment {
+    private static final String TAG = HomeFragment.class.getSimpleName();
 
     private OnChangeButtonListener mListener;
     private static HomeFragment instance = null;
@@ -37,12 +39,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate()");
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView()");
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView testTv = (TextView) view.findViewById(R.id.test);
         testTv.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +56,7 @@ public class HomeFragment extends Fragment {
                 testTv.setText("test");
             }
         });
+
         return view;
     }
 
@@ -58,6 +64,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d(TAG, "onAttach()");
+
         try {
             mListener = (OnChangeButtonListener) activity;
         } catch (ClassCastException e) {
@@ -69,6 +77,8 @@ public class HomeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.d(TAG, "onDetach()");
+
         mListener = null;
     }
 
