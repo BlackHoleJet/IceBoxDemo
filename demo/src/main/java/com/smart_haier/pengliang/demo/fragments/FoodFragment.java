@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
+import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -31,16 +31,15 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.jess.ui.TwoWayAdapterView;
 import com.jess.ui.TwoWayGridView;
 import com.smart_haier.pengliang.demo.R;
-import com.smart_haier.pengliang.demo.activity.MainActivity;
 import com.smart_haier.pengliang.demo.activity.OnChangeButtonListener;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 
 public class FoodFragment extends Fragment {
     private static final String TAG = FoodFragment.class.getSimpleName();
-    AlertDialog dialog = null;
+    private AlertDialog dialog = null;
+    public boolean isShow;
 
     private int[] imagIds = {R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
             R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple, R.mipmap.apple,
@@ -48,7 +47,18 @@ public class FoodFragment extends Fragment {
     private BarChart mChart;
     private RequestQueue mRequestQueue;
     private String ImageUrl = "http://www.51qe.cn/zhongyao/UploadFiles_5272/201210/2012101109342023.jpg";
-
+    private String ImageAppleUrl = "http://www.xuyaocai.com/images/201405/goods_img/339_P_1399000342751.jpg";
+    private String ImageUrl1 = "http://pic.nipic.com/2008-02-16/2008216151436165_2.jpg";
+    private String ImageUrl2 = "http://u2.zhenyouliao.com/images/20140315/759e26d3-90e7-49e2-be46-4cc8d0f922e8.jpg";
+    private String ImageUrl3 = "http://thumbs.dreamstime.com/x/%C5%A3%C8%E2%B2%E9%B3%F6%B5%C4%C8%E2-22017642.jpg";
+    private String ImageUrl4 = "http://pica.nipic.com/2008-05-26/2008526233336488_2.jpg";
+    private String ImageUrl5 = "http://img3.tubachina.com/2007xintukuaidi/other/shucai/mid_53Y3ZNC121XR95O.jpg";
+    private String ImageUrl6 = "http://pic8.nipic.com/20100701/2839526_124431785971_2.jpg";
+    private String ImageUrl7 = "http://jining.dzwww.com/jk/xt/201301/W020130128330647216422.jpg";
+    private String ImageUrl8 = "http://img.taopic.com/uploads/allimg/120405/10021-12040500331876.jpg";
+    private String ImageUrl9 = "http://img0.imgtn.bdimg.com/it/u=3606920438,902821268&fm=21&gp=0.jpg";
+    private String ImageUrl0 = "http://www.linjulu.com/bk/uploads/201312/1387864590odAORgm0.jpg";
+    private String[] Images = {ImageUrl, ImageAppleUrl, ImageUrl1, ImageUrl2, ImageUrl3, ImageUrl4, ImageUrl5, ImageUrl6, ImageUrl7, ImageUrl8, ImageUrl9, ImageUrl0};
     private OnChangeButtonListener mListener;
     private static FoodFragment instance = null;
 
@@ -128,19 +138,17 @@ public class FoodFragment extends Fragment {
         dialog.show();
     }
 
-    ;
-
 
     class FoodGvAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {
-            return 1000;
+            return Images.length;
         }
 
         @Override
         public Object getItem(int position) {
-            return null;
+            return Images[position];
         }
 
         @Override
@@ -159,25 +167,29 @@ public class FoodFragment extends Fragment {
             } else {
                 vh = (ViewHolder) convertView.getTag();
             }
-            ImageRequest irequest = new ImageRequest(
-                    ImageUrl,
-                    new Response.Listener<Bitmap>() {
-                        @SuppressLint("NewApi")
-                        @SuppressWarnings("deprecation")
-                        @Override
-                        public void onResponse(Bitmap bitmap) {
+            if (isShow == true) {
+                ImageRequest irequest = new ImageRequest(
+                        Images[position],
+                        new Response.Listener<Bitmap>() {
+                            @SuppressLint("NewApi")
+                            @SuppressWarnings("deprecation")
+                            @Override
+                            public void onResponse(Bitmap bitmap) {
 //                            img.setBackgroundDrawable(new BitmapDrawable(
 //                                    MainActivity.this.getResources(), bitmap));
-                            vh.imageView.setImageBitmap(bitmap);
-                        }
-                    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError arg0) {
-                    Toast.makeText(FoodFragment.this.getActivity(), "load img err", Toast.LENGTH_SHORT).show();
+                                    vh.imageView.setImageBitmap(bitmap);
+                            }
+                        }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError arg0) {
+                        Toast.makeText(FoodFragment.this.getActivity(), "err:"+arg0.toString(), Toast.LENGTH_SHORT).show();
 
-                }
-            });
-            mRequestQueue.add(irequest);
+                    }
+                });
+                irequest.setShouldCache(true);
+                mRequestQueue.add(irequest);
+            }
+
             return convertView;
 
         }
@@ -230,6 +242,12 @@ public class FoodFragment extends Fragment {
         mChart.setData(data);
         mChart.invalidate();
         mChart.animateY(800);
+    }
+
+
+    public void changeShowState(boolean state) {
+        isShow = state;
+
     }
 
 

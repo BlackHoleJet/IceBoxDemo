@@ -21,7 +21,8 @@ import java.util.List;
 
 public class MainActivity extends FragmentActivity implements OnChangeButtonListener, View.OnClickListener {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private Fragment mHomeFragment, mFoodFragment;
+    private Fragment mHomeFragment;
+    private FoodFragment mFoodFragment;
     private TextView mTitle;
     private Button mBtHome, mBtFood;
 
@@ -91,11 +92,12 @@ public class MainActivity extends FragmentActivity implements OnChangeButtonList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bt_home:
+                mFoodFragment.changeShowState(false);
 
                 changeFragment(mHomeFragment, R.string.title_home);
                 break;
             case R.id.bt_food:
-
+                mFoodFragment.changeShowState(true);
                 changeFragment(mFoodFragment, R.string.title_food);
                 break;
         }

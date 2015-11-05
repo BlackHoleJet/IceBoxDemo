@@ -20,16 +20,16 @@
         android:layout_height="match_parent"
         android:layout_weight="5"
         app:cacheColorHint="#E8E8E8"
-        app:columnWidth="300dp"
+        app:columnWidth="500dp"
         app:gravity="center"
-        app:horizontalSpacing="16dp"
-        app:numColumns="2"
-        app:numRows="auto_fit"
-        app:rowHeight="300dp"
+        app:horizontalSpacing="5dp"
+
+        app:numRows="2"
+        app:rowHeight="500dp"
         app:scrollDirectionLandscape="horizontal"
         app:scrollDirectionPortrait="vertical"
         app:stretchMode="spacingWidthUniform"
-        app:verticalSpacing="16dp">
+        app:verticalSpacing="5dp">
 
     </com.jess.ui.TwoWayGridView>
 
