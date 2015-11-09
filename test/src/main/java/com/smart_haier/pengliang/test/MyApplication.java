@@ -9,15 +9,17 @@ import com.android.volley.toolbox.Volley;
  * Created by PengLiang on 2015/11/5.
  */
 public class MyApplication extends Application {
-    private RequestQueue mRequestQueue;
+    private static RequestQueue mRequestQueue;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         mRequestQueue = Volley.newRequestQueue(this);
     }
 
-    public RequestQueue getRequestQueue() {
+    public static RequestQueue getRequestQueue() {
         return mRequestQueue;
     }
 }

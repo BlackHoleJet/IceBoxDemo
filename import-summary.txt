@@ -7,13 +7,8 @@ The following files were *not* copied into the new Gradle project; you
 should evaluate whether these are still needed in your project and if
 so manually move them:
 
-* .gitignore
 * ic_launcher-web.png
-* proguard\
-* proguard\dump.txt
-* proguard\mapping.txt
-* proguard\seeds.txt
-* proguard\usage.txt
+* proguard-project.txt
 
 Replaced Jars with Dependencies:
 --------------------------------
@@ -25,30 +20,17 @@ the .jar file in your project was of an older version than the
 dependency we picked, which could render the project not compileable.
 You can disable the jar replacement in the import wizard and try again:
 
-android-support-v4.jar => com.android.support:support-v4:19.+
+android-support-v4.jar => com.android.support:support-v4:20.+
 
 Moved Files:
 ------------
 Android Gradle projects use a different directory structure than ADT
 Eclipse projects. Here's how the projects were restructured:
 
-* AndroidManifest.xml => aMapLocationDemo\src\main\AndroidManifest.xml
-* assets\ => aMapLocationDemo\src\main\assets
-* libs\AMap_Location_v1.4.1_20150917.jar => aMapLocationDemo\libs\AMap_Location_v1.4.1_20150917.jar
-* libs\Android_Map_V3.0.20150831.jar => aMapLocationDemo\libs\Android_Map_V3.0.20150831.jar
-* libs\arm64-v8a\libamapv304.so => aMapLocationDemo\src\main\jniLibs\arm64-v8a\libamapv304.so
-* libs\arm64-v8a\libamapv304ex.so => aMapLocationDemo\src\main\jniLibs\arm64-v8a\libamapv304ex.so
-* libs\armeabi-v7a\libamapv304.so => aMapLocationDemo\src\main\jniLibs\armeabi-v7a\libamapv304.so
-* libs\armeabi-v7a\libamapv304ex.so => aMapLocationDemo\src\main\jniLibs\armeabi-v7a\libamapv304ex.so
-* libs\armeabi\libamapv304.so => aMapLocationDemo\src\main\jniLibs\armeabi\libamapv304.so
-* libs\armeabi\libamapv304ex.so => aMapLocationDemo\src\main\jniLibs\armeabi\libamapv304ex.so
-* libs\armeabi\libgdamapv4sdk736.so => aMapLocationDemo\src\main\jniLibs\armeabi\libgdamapv4sdk736.so
-* libs\armeabi\libgdamapv4sdk736ex.so => aMapLocationDemo\src\main\jniLibs\armeabi\libgdamapv4sdk736ex.so
-* libs\x86\libamapv304.so => aMapLocationDemo\src\main\jniLibs\x86\libamapv304.so
-* libs\x86\libamapv304ex.so => aMapLocationDemo\src\main\jniLibs\x86\libamapv304ex.so
-* proguard-project.txt => aMapLocationDemo\proguard-project.txt
-* res\ => aMapLocationDemo\src\main\res\
-* src\ => aMapLocationDemo\src\main\java\
+* AndroidManifest.xml => rSA\src\main\AndroidManifest.xml
+* assets\ => rSA\src\main\assets\
+* res\ => rSA\src\main\res\
+* src\ => rSA\src\main\java\
 
 Missing Android Support Repository:
 -----------------------------------

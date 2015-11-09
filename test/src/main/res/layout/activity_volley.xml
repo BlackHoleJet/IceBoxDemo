@@ -4,7 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:orientation="vertical"
     tools:context="com.smart_haier.pengliang.test.VolleyActivity">
+
+    <EditText
+        android:id="@+id/url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="test" />
+
+    <TextView
+        android:id="@+id/json"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>
