@@ -8,16 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class VolleyActivity extends AppCompatActivity {
     private String testUrl = "http://www.weather.com.cn/adat/sk/101280101.html";
@@ -25,8 +25,9 @@ public class VolleyActivity extends AppCompatActivity {
     private Button mBtTest;
     private TextView testContent;
     private static final String TAG = VolleyActivity.class.getSimpleName();
-    Gson gson;
-    wether wetherInfo;
+    private Gson gson;
+    private wether wetherInfo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class VolleyActivity extends AppCompatActivity {
         mBtTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stringRequest = new StringRequest(testUrl, new Response.Listener<String>() {
+                stringRequest = new StringRequest(Request.Method.GET, testUrl, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d(TAG, "json:" + response);
@@ -57,12 +58,22 @@ public class VolleyActivity extends AppCompatActivity {
                         Toast.makeText(VolleyActivity.this, "err:" + error.toString(), Toast.LENGTH_SHORT).show();
 
                     }
-                });
+                }) {
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> map = new HashMap<String, String>();
+                        map.put("params1", "value1");
+                        map.put("params2", "value2");
+                        return map;
+
+                    }
+                };
+
 
                 MyApplication.getRequestQueue().add(stringRequest);
             }
 
         });
     }
-
 }
