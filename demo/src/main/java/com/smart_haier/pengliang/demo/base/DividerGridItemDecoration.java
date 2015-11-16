@@ -20,8 +20,7 @@ import android.view.View;
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration
 {
 
-//    private static final int[] ATTRS = new int[] { android.R.attr.listDivider };
-    private static final int[] ATTRS = new int[] { android.R.attr.listDividerAlertDialog };
+    private static final int[] ATTRS = new int[] { android.R.attr.listDivider };
     private Drawable mDivider;
 
     public DividerGridItemDecoration(Context context)

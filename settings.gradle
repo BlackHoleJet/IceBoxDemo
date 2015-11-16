@@ -1,4 +1,3 @@
-include ':demo', ':test',':TwoWayGridViewGradle'
+include ':demo', ':test', ':TwoWayGridViewGradle', ':amapdemo'
 
-include ':aMapLocationDemo'
 include ':rSA'

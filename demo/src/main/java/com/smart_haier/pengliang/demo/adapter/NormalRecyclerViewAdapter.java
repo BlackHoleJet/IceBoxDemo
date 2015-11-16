@@ -37,12 +37,16 @@ public class NormalRecyclerViewAdapter extends RecyclerView.Adapter<NormalRecycl
     public void onBindViewHolder(NormalTextViewHolder holder, int position) {
 //        holder.mTextView.setText(mTitles[position]);
         Random random = new Random();
-        int a = random.nextInt(100);
+        int a = random.nextInt(500);
         int b = random.nextInt(100);
         int c = random.nextInt(100);
         int d = random.nextInt(100);
         Log.d(TAG, "random num:" + a + "  " + b + "  " + c + "  " + d);
-        holder.image.setPadding(a, b, c, d);
+        holder.image.setPadding(0, 20, 0, 20);
+//        ViewGroup.LayoutParams layoutParams = holder.image.getLayoutParams();
+//        layoutParams.height = a;
+//        holder.image.setLayoutParams(layoutParams);
+
 
     }
 

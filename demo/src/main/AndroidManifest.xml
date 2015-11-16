@@ -14,7 +14,8 @@
             android:name=".activity.DemoActivity"
             android:label="@string/title_activity_demo"
             android:screenOrientation="landscape"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
