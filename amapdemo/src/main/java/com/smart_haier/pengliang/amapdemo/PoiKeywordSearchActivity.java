@@ -273,6 +273,7 @@ public class PoiKeywordSearchActivity extends FragmentActivity implements
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         String newText = s.toString().trim();
+
         Inputtips inputTips = new Inputtips(PoiKeywordSearchActivity.this,
                 new InputtipsListener() {
 
